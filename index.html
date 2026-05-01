@@ -1,67 +1,345 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>떡잎방범대 | 아이 안전한 집 만들기</title>
-  
-  <!-- ✅ Tailwind 최신 Play CDN으로 변경 -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
-  <style>
-    .hero-bg {
-      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
-                  url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>떡잎방범대 - 우리 아이를 위한 안전한 집 만들기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Gaegu:wght@400;700&display=swap');
+
+        :root {
+            --primary-green: #A8D5BA;
+            --soft-beige: #F5F5DC;
+            --accent-yellow: #FFF9C4;
+            --safety-blue: #64B5F6;
+            --text-dark: #333333;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--soft-beige);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+        }
+
+        .heading-font {
+            font-family: 'Gaegu', cursive;
+        }
+
+        .bg-primary { background-color: var(--primary-green); }
+        .text-primary { color: #5B8E7D; }
+        .bg-safety { background-color: var(--safety-blue); }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #A8D5BA 0%, #F5F5DC 100%);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+    </style>
 </head>
-<body class="font-sans bg-gray-50 text-gray-800">
+<body>
 
-  <!-- 나머지 코드는 동일합니다. 아래부터 이전 코드 그대로 사용 -->
-
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <span class="text-3xl">🌱</span>
-        <div>
-          <h1 class="text-2xl font-bold text-green-600">떡잎방범대</h1>
-          <p class="text-xs text-gray-500 -mt-1">아이를 지키는 안전지킴이</p>
+    <!-- 네비게이션 바 -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="heading-font text-3xl font-bold text-primary flex items-center">
+                        <i class="fas fa-leaf mr-2"></i> 떡잎방범대
+                    </span>
+                </div>
+                <div class="hidden md:flex space-x-8 font-medium">
+                    <a href="#about" class="hover:text-primary transition">서비스 소개</a>
+                    <a href="#diagnosis" class="hover:text-primary transition">안전 진단</a>
+                    <a href="#guide" class="hover:text-primary transition">위험 가이드</a>
+                    <a href="#store" class="hover:text-primary transition">안전용품</a>
+                    <a href="#review" class="hover:text-primary transition">후기</a>
+                </div>
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-primary text-white px-6 py-2 rounded-full font-bold hover:opacity-90 transition">상담 신청</a>
+                </div>
+                <!-- 모바일 메뉴 버튼 -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="hidden md:flex gap-8 text-lg">
-        <a href="#service" class="hover:text-green-600 transition">서비스</a>
-        <a href="#diagnosis" class="hover:text-green-600 transition">안전진단</a>
-        <a href="#guide" class="hover:text-green-600 transition">안전가이드</a>
-        <a href="#review" class="hover:text-green-600 transition">후기</a>
-      </div>
-      <a href="#contact" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition">
-        상담 신청하기
-      </a>
-    </div>
-  </nav>
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 p-4">
+            <a href="#about" class="block py-2">서비스 소개</a>
+            <a href="#diagnosis" class="block py-2">안전 진단</a>
+            <a href="#guide" class="block py-2">위험 가이드</a>
+            <a href="#store" class="block py-2">안전용품</a>
+            <a href="#contact" class="block py-2 text-primary font-bold">상담 신청</a>
+        </div>
+    </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-bg h-screen flex items-center text-white">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
-        떡잎처럼 여린 우리 아이,<br>
-        <span class="text-green-400">방범대가 지킨다</span>
-      </h2>
-      <p class="text-2xl mb-10 max-w-2xl mx-auto">
-        “떡잎방범대와 함께, 안전한 집 만들기”
-      </p>
-      <div class="flex flex-col sm:flex-row gap-6 justify-center">
-        <a href="#diagnosis" class="bg-white text-green-700 hover:bg-green-100 px-10 py-5 rounded-2xl text-xl font-semibold shadow-lg transition">
-          우리 집 안전 진단받기
-        </a>
-        <a href="#service" class="border-2 border-white hover:bg-white/20 px-10 py-5 rounded-2xl text-xl font-semibold transition">
-          서비스 자세히 보기
-        </a>
-      </div>
-    </div>
-  </section>
+    <!-- 히어로 섹션 -->
+    <section class="hero-gradient pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h2 class="text-primary font-bold mb-4 tracking-wider uppercase">Child Safety First</h2>
+                <h1 class="heading-font text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    떡잎방범대와 함께,<br>
+                    <span class="text-primary">안전한 집</span> 만들기
+                </h1>
+                <p class="text-lg text-gray-600 mb-10 leading-relaxed">
+                    아이의 눈높이에서 집을 바라봅니다.<br>
+                    작은 떡잎처럼 소중한 우리 아이를 위해<br>
+                    생활 속 숨겨진 위험 요소를 완벽하게 차단해 드립니다.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#diagnosis" class="bg-primary text-white text-center px-8 py-4 rounded-2xl text-xl font-bold shadow-lg hover:scale-105 transition">
+                        우리 집 안전 진단받기
+                    </a>
+                    <a href="#about" class="bg-white text-primary text-center px-8 py-4 rounded-2xl text-xl font-bold border-2 border-primary hover:bg-gray-50 transition">
+                        서비스 알아보기
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative flex justify-center">
+                <!-- 이미지 홀더 -->
+                <div class="w-80 h-80 md:w-full md:h-[500px] bg-white/50 rounded-[40px] overflow-hidden shadow-2xl rotate-3 relative">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-400 italic">
+                        [귀여운 떡잎 캐릭터와 아이들 이미지]
+                    </div>
+                    <!-- 실제 이미지를 넣을 경우 <img src="..." alt="..." class="object-cover w-full h-full"> -->
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl hidden lg:block">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
+                            <i class="fas fa-check-circle text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold">누적 진단 수</p>
+                            <p class="text-sm text-gray-500">1,200+ 가구 돌파</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- 나머지 섹션은 이전 코드와 동일하게 복사해서 붙여넣으세요 -->
-  <!-- (문제 인식, 주요 서비스, 안전 진단, 안전 가
+    <!-- 문제 인식 섹션 -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-3xl font-bold mb-8">혹시 알고 계셨나요?</h2>
+            <div class="bg-red-50 p-8 rounded-3xl border-l-8 border-red-400 mb-10">
+                <p class="text-xl leading-relaxed text-gray-700">
+                    "어린이 안전사고의 <span class="text-red-500 font-bold">70% 이상</span>은 가장 안전해야 할 <span class="font-bold underline text-red-500">집 안</span>에서 발생합니다."
+                </p>
+            </div>
+            <p class="text-gray-600 mb-4">낙상, 찍힘, 미끄러짐, 화상까지...</p>
+            <p class="text-2xl font-bold text-primary">떡잎방범대가 부모님의 불안을 안심으로 바꿔드립니다.</p>
+        </div>
+    </section>
+
+    <!-- 주요 서비스 카드 -->
+    <section class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl font-bold mb-4">주요 서비스</h2>
+                <div class="w-20 h-1 bg-primary mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 서비스 1 -->
+                <div class="bg-white p-8 rounded-[30px] card-hover border border-gray-100">
+                    <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center text-primary text-3xl mb-6">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">온라인 셀프 진단</h3>
+                    <p class="text-gray-600 mb-6">스마트폰으로 간단히 체크하는 우리 집 안전 등급. 맞춤형 리포트를 즉시 발행해 드립니다.</p>
+                    <span class="text-primary font-bold">무료 체험하기 <i class="fas fa-arrow-right ml-2"></i></span>
+                </div>
+                <!-- 서비스 2 -->
+                <div class="bg-white p-8 rounded-[30px] card-hover border border-gray-100 relative">
+                    <div class="absolute top-0 right-10 transform -translate-y-1/2 bg-yellow-400 text-white px-4 py-1 rounded-full text-sm font-bold">추천</div>
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-400 text-3xl mb-6">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">방문 정밀 컨설팅</h3>
+                    <p class="text-gray-600 mb-6">안전 전문가가 직접 방문하여 가구 배치부터 소품까지 1:1 맞춤 개선안을 제안합니다.</p>
+                    <span class="text-primary font-bold">예약 신청하기 <i class="fas fa-arrow-right ml-2"></i></span>
+                </div>
+                <!-- 서비스 3 -->
+                <div class="bg-white p-8 rounded-[30px] card-hover border border-gray-100">
+                    <div class="w-16 h-16 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-600 text-3xl mb-6">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">토탈 케어 시공</h3>
+                    <p class="text-gray-600 mb-6">안전 가드 설치부터 모서리 보호 작업까지, 전문가의 손길로 완벽하게 마무리합니다.</p>
+                    <span class="text-primary font-bold">자세히 보기 <i class="fas fa-arrow-right ml-2"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 위험 요소별 가이드 (Preview) -->
+    <section class="py-20 bg-primary/10 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="heading-font text-4xl font-bold mb-12 text-center">공간별 안전 가이드</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition cursor-pointer">
+                    <div class="text-4xl mb-3">🛋️</div>
+                    <p class="font-bold">거실</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition cursor-pointer">
+                    <div class="text-4xl mb-3">🍳</div>
+                    <p class="font-bold">주방</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition cursor-pointer">
+                    <div class="text-4xl mb-3">🛀</div>
+                    <p class="font-bold">욕실</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition cursor-pointer">
+                    <div class="text-4xl mb-3">🧸</div>
+                    <p class="font-bold">아이방</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 상담 신청 폼 -->
+    <section id="contact" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto bg-white rounded-[40px] shadow-2xl overflow-hidden flex flex-col md:flex-row">
+            <div class="md:w-1/3 bg-primary p-10 text-white">
+                <h2 class="heading-font text-3xl font-bold mb-6">지금 시작하세요</h2>
+                <p class="mb-10 opacity-90">상담 신청을 남겨주시면 안전 전문가가 24시간 내에 연락드립니다.</p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-phone"></i>
+                        <span>1588-0000</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-envelope"></i>
+                        <span>safety@leafguard.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-2/3 p-10">
+                <form class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">성함</label>
+                            <input type="text" placeholder="홍길동" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">연락처</label>
+                            <input type="tel" placeholder="010-0000-0000" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">아이 연령</label>
+                        <select class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary">
+                            <option>영아 (0~12개월)</option>
+                            <option>유아 (1~3세)</option>
+                            <option>어린이 (4세 이상)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">관심 서비스</label>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <label class="flex items-center bg-gray-100 px-4 py-2 rounded-full cursor-pointer hover:bg-primary/20">
+                                <input type="checkbox" class="mr-2"> 온라인 진단
+                            </label>
+                            <label class="flex items-center bg-gray-100 px-4 py-2 rounded-full cursor-pointer hover:bg-primary/20">
+                                <input type="checkbox" class="mr-2"> 방문 진단
+                            </label>
+                            <label class="flex items-center bg-gray-100 px-4 py-2 rounded-full cursor-pointer hover:bg-primary/20">
+                                <input type="checkbox" class="mr-2"> 시공/설치
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">문의 사항</label>
+                        <textarea rows="4" placeholder="궁금하신 내용을 남겨주세요" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-primary"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:opacity-90 transition">
+                        신청 완료하기
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-900 text-gray-400 py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between mb-8">
+                <div class="mb-8 md:mb-0">
+                    <span class="heading-font text-3xl font-bold text-white flex items-center mb-4">
+                        <i class="fas fa-leaf mr-2 text-primary"></i> 떡잎방범대
+                    </span>
+                    <p class="text-sm">우리 아이의 첫걸음부터 안전하게,<br>아이 눈높이 전문 안전 컨설팅 그룹</p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
+                    <div>
+                        <h4 class="text-white font-bold mb-4">회사소개</h4>
+                        <ul>
+                            <li class="mb-2 hover:text-white"><a href="#">브랜드 스토리</a></li>
+                            <li class="mb-2 hover:text-white"><a href="#">전문가 소개</a></li>
+                            <li class="mb-2 hover:text-white"><a href="#">채용 정보</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4">고객지원</h4>
+                        <ul>
+                            <li class="mb-2 hover:text-white"><a href="#">FAQ</a></li>
+                            <li class="mb-2 hover:text-white"><a href="#">사고 사례 공유</a></li>
+                            <li class="mb-2 hover:text-white"><a href="#">공지사항</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <h4 class="text-white font-bold mb-4">SNS</h4>
+                        <div class="flex gap-4 text-xl">
+                            <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="hover:text-white"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-xs flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>&copy; 2024 떡잎방범대. All Rights Reserved. 대표: 짱구 | 사업자등록번호: 123-45-67890</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white">이용약관</a>
+                    <a href="#" class="hover:text-white font-bold">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 모바일 메뉴 토글
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        // 스크롤 시 네비게이션 효과
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>
